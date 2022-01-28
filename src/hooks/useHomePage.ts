@@ -3,7 +3,7 @@ import { ValuesNumberForm } from "../interfaces"
 import { generateRandomNumber } from "../utils"
 
 export const useHomePage = () => {
-    const [randomNumber, setRandomNumber] = useState<number | undefined>(undefined)
+    const [randomNumber, setRandomNumber] = useState<string | undefined>(undefined)
 
     const submitForm = (values: ValuesNumberForm) => {
         setRandomNumber(generateRandomNumber(values.number))

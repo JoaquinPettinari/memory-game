@@ -10,5 +10,5 @@ export interface ValuesNumberForm {
 
 export interface HomePageContextProps {
     submitForm: (values: ValuesNumberForm) => void ,
-    randomNumber: number | undefined
+    randomNumber: string | undefined
 }

@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { useContext } from "react";
 import { HomePageContext } from "../HomePageComponent/HomePageComponent";
 
@@ -6,9 +7,9 @@ function RandomNumber(){
     const { randomNumber } = useContext( HomePageContext );
 
     return(
-        <h1>
+        <Typography variant="body1">
             Number {randomNumber}
-        </h1>
+        </Typography>
     )
 }
 

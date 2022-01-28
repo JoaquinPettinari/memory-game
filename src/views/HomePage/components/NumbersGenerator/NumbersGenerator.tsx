@@ -2,8 +2,6 @@ import { Button, Grid, TextField } from "@mui/material";
 import { Formik } from "formik";
 import { useContext } from "react";
 import * as Yup from "yup";
-import { ValuesNumberForm } from "../../../../interfaces";
-import { generateRandomNumber } from "../../../../utils";
 import { ErrorText } from "../ErrorText/ErrorText";
 import { HomePageContext } from "../HomePageComponent/HomePageComponent";
 
@@ -30,7 +28,6 @@ function NumberGenerator() {
                 handleBlur,
                 handleChange,
                 handleSubmit,
-                isSubmitting
             }) => (
                 <form onSubmit={handleSubmit}>
                     <Grid container justifyContent="flex-end" spacing={4}>
@@ -47,12 +44,11 @@ function NumberGenerator() {
                                 size="small"
                             />
                         </Grid>
-                        <Grid item xs={10} sm={6}>
+                        <Grid item xs={10} sm={6} style={{ textAlign:'start'}}>
                             <Button
                                 color="primary"
                                 type="submit"
                                 variant="contained"
-                                disabled={isSubmitting}
                             >
                                 Submit
                             </Button>
