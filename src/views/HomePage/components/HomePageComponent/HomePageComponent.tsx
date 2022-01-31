@@ -1,5 +1,6 @@
 import { createContext } from 'react';
 import { useHomePage } from '../../../../hooks/useHomePage';
+import { useStopWatch } from '../../../../hooks/useStopWatch';
 import { HomePageContextProps } from '../../../../interfaces';
 
 export const HomePageContext = createContext({} as HomePageContextProps);
@@ -12,12 +13,17 @@ export interface Props {
 
 export const HomePageComponent = ({ children }: Props ) => {
 
-    const { submitForm, randomNumber } = useHomePage();
+    const { submitForm, randomNumber, resetNumber } = useHomePage();
+    const { start, getTime, stopWatch} = useStopWatch()
 
     return (
         <Provider value={{
             submitForm,
-            randomNumber            
+            randomNumber,
+            resetNumber,
+            start,
+            getTime,
+            stopWatch
         }}>
             { children }
         </Provider>

@@ -11,10 +11,12 @@ const validationSearch = Yup.object().shape({
         .required("Is required")
 });
 
-function NumberGenerator() {
+function NumberConfig() {
 
-    const { submitForm } = useContext( HomePageContext );
+    const { submitForm, randomNumber } = useContext( HomePageContext );
 
+    if(randomNumber) return null
+    
     return (
         <Formik
             initialValues={{ number: 0 }}
@@ -63,4 +65,4 @@ function NumberGenerator() {
     );
 }
 
-export { NumberGenerator }
+export { NumberConfig }

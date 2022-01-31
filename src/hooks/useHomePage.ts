@@ -8,8 +8,14 @@ export const useHomePage = () => {
     const submitForm = (values: ValuesNumberForm) => {
         setRandomNumber(generateRandomNumber(values.number))
     }
+
+    const resetNumber = () => {
+        setRandomNumber(undefined)
+    }
+
     return {
         submitForm,
-        randomNumber
+        randomNumber,
+        resetNumber
     }
 }
