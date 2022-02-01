@@ -1,44 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useStopWatch() {
-    const [second, setSecond] = useState<string>("0");
-    const [minute, setMinute] = useState<string>("0");
-    const [isStopped, setIsStopped] = useState<boolean>(true);
+    const [isActive, setIsActive] = useState<boolean>(false);
+    const [isPaused, setIsPaused] = useState<boolean>(true);
+    const [time, setTime] = useState<number>(0);
 
-    const start = () => {
-        setInterval(() => {
-            if (!isStopped) {
-                let sec = parseInt(second),
-                min = parseInt(minute);
+    useEffect(() => {
+        let interval: any = null;
 
-                sec = sec + 1;
+        if (isActive && isPaused === false) {
+            interval = setInterval(() => {
+                setTime((time) => time + 10);
+            }, 10);
+        } else {
+            clearInterval(interval);
+        }
+        return () => {
+            clearInterval(interval);
+        };
+    }, [isActive, isPaused]);
 
-                if (sec === 60) {
-                    setMinute((min + 1).toString());
-                    setSecond("00");
-                }
-
-                if (sec < 10 || sec === 0) {
-                    setSecond("0" + sec)
-                }
-                if (min < 10 || min === 0) {
-                    setMinute("0" + min)
-                }
-            }
-        }, 1000);
+    const handleStart = () => {
+        setIsActive(true);
+        setIsPaused(false);
     };
 
-    const getTime = () => {
-        return minute + ":" + second
-    }
+    const handlePauseResume = () => {
+        setIsPaused(!isPaused);
+    };
 
-    const stopWatch = () => {
-        setIsStopped(true)
-    }
+    const handleReset = () => {
+        setIsActive(false);
+        setTime(0);
+    };
 
     return {
-        start,
-        getTime,
-        stopWatch
+        handleStart,
+        handleReset,
+        handlePauseResume,
+        time
     };
 }

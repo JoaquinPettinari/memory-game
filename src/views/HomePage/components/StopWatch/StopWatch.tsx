@@ -1,16 +1,13 @@
-import { Grid, Typography } from "@mui/material";
-import { useContext } from "react";
-import { HomePageContext } from "../HomePageComponent/HomePageComponent";
+import Timer from "./Timer";
+import { StopWatchProps } from '../../../../interfaces'
 
-function StopWatch() {
+function StopWatch({ time }: StopWatchProps) {
 
-    const { getTime } = useContext(HomePageContext);
-
-    return(
-        <Grid xs={12}>
-            {getTime}
-        </Grid>
-    )
+    return (
+        <Timer time={time} />        
+    );
 }
+
+export default StopWatch;
 
 export { StopWatch };

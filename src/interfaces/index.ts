@@ -12,7 +12,26 @@ export interface HomePageContextProps {
     submitForm: (values: ValuesNumberForm) => void ,
     randomNumber: string | undefined,
     resetNumber: () => void,
-    start: () => void,
-    stopWatch: () => void,
-    getTime: () => string,
+    time: number,
+    handleStart: () => void,
+    handleReset: () => void,
+}
+
+export interface StopWatchProps {
+    time: number
+}
+
+export interface ResetButtonProps {
+    handleReset: () => void
+    resetNumber: () => void
+    randomNumber: string | undefined
+}
+
+export interface RandomNumberProps {
+    randomNumber: string | undefined
+}
+
+export interface StartButtonProps {
+    handleStart: () => void
+    randomNumber: string | undefined
 }

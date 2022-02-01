@@ -2,6 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import { useContext } from "react";
 import { HomePageContext } from "../HomePageComponent/HomePageComponent";
 import { makeStyles } from '@mui/styles';
+import { RandomNumberProps } from "../../../../interfaces";
 
 const useStyles = makeStyles({
     number: {
@@ -10,9 +11,8 @@ const useStyles = makeStyles({
     },
 });
 
-function RandomNumber() {
+function RandomNumber({ randomNumber }: RandomNumberProps) {
     const { number } = useStyles();
-    const { randomNumber } = useContext(HomePageContext);
 
     return (
         <Grid item xs={11} sm={6}>

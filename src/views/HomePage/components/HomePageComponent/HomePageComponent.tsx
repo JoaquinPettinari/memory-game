@@ -14,16 +14,16 @@ export interface Props {
 export const HomePageComponent = ({ children }: Props ) => {
 
     const { submitForm, randomNumber, resetNumber } = useHomePage();
-    const { start, getTime, stopWatch} = useStopWatch()
+    const { time, handleStart, handleReset} = useStopWatch()
 
     return (
         <Provider value={{
             submitForm,
             randomNumber,
             resetNumber,
-            start,
-            getTime,
-            stopWatch
+            time,
+            handleStart,
+            handleReset
         }}>
             { children }
         </Provider>

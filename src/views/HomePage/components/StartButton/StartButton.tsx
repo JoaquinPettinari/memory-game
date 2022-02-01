@@ -1,10 +1,7 @@
 import { Button, Grid } from '@mui/material';
-import { useContext } from 'react';
-import { HomePageContext } from '../HomePageComponent/HomePageComponent';
+import { StartButtonProps } from '../../../../interfaces';
 
-function StartButton() {
-
-    const { randomNumber, start } = useContext(HomePageContext);
+function StartButton({ randomNumber, handleStart }: StartButtonProps) {    
 
     if (!randomNumber) return null
 
@@ -13,7 +10,7 @@ function StartButton() {
             <Button
                 variant="contained"
                 color="primary"
-                onClick={start}
+                onClick={handleStart}
             >
                 Start
             </Button>

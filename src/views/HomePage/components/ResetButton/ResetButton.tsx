@@ -1,10 +1,7 @@
 import { Button, Grid } from '@mui/material';
-import { useContext } from 'react';
-import { HomePageContext } from '../HomePageComponent/HomePageComponent';
+import { ResetButtonProps } from '../../../../interfaces'
 
-function ResetButton() {
-
-    const { randomNumber, resetNumber } = useContext(HomePageContext);
+function ResetButton({ randomNumber, resetNumber, handleReset }: ResetButtonProps) {    
 
     if (!randomNumber) return null
 
@@ -13,7 +10,10 @@ function ResetButton() {
             <Button
                 variant="contained"
                 color="secondary"
-                onClick={resetNumber}
+                onClick={() => { 
+                    resetNumber()
+                    handleReset()
+                }}
             >
                 Reset
             </Button>
