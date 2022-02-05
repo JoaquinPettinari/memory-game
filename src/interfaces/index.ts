@@ -15,10 +15,19 @@ export interface HomePageContextProps {
     time: number,
     handleStart: () => void,
     handleReset: () => void,
+    isActive: boolean,
 }
 
 export interface StopWatchProps {
     time: number
+}
+
+export interface RandomButtonsProps {
+    handleReset: () => void
+    resetNumber: () => void
+    handleStart: () => void
+    randomNumber: string | undefined
+    isActive: boolean
 }
 
 export interface ResetButtonProps {
@@ -34,4 +43,8 @@ export interface RandomNumberProps {
 export interface StartButtonProps {
     handleStart: () => void
     randomNumber: string | undefined
+}
+
+export interface FinishButtonProps {
+    validateRandomNumber: () => void
 }

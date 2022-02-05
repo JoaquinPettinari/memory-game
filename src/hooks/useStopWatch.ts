@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { start } from "repl";
 
 export function useStopWatch() {
     const [isActive, setIsActive] = useState<boolean>(false);
@@ -38,6 +39,7 @@ export function useStopWatch() {
         handleStart,
         handleReset,
         handlePauseResume,
-        time
+        time,
+        isActive
     };
 }

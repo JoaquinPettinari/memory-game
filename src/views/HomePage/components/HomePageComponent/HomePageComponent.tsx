@@ -14,7 +14,7 @@ export interface Props {
 export const HomePageComponent = ({ children }: Props ) => {
 
     const { submitForm, randomNumber, resetNumber } = useHomePage();
-    const { time, handleStart, handleReset} = useStopWatch()
+    const { time, handleStart, handleReset, isActive} = useStopWatch()
 
     return (
         <Provider value={{
@@ -23,7 +23,8 @@ export const HomePageComponent = ({ children }: Props ) => {
             resetNumber,
             time,
             handleStart,
-            handleReset
+            handleReset,
+            isActive
         }}>
             { children }
         </Provider>
