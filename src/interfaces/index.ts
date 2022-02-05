@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 
 export interface ErrorTextProps {
     touched: boolean | undefined
@@ -11,11 +12,12 @@ export interface ValuesNumberForm {
 export interface HomePageContextProps {
     submitForm: (values: ValuesNumberForm) => void ,
     randomNumber: string | undefined,
-    resetNumber: () => void,
+    resetNumber: FunctionReturnVoid,
     time: number,
-    handleStart: () => void,
-    handleReset: () => void,
+    handleStart: FunctionReturnVoid,
+    handleReset: FunctionReturnVoid,
     isActive: boolean,
+    handlePauseResume: FunctionReturnVoid,
 }
 
 export interface StopWatchProps {
@@ -23,16 +25,17 @@ export interface StopWatchProps {
 }
 
 export interface RandomButtonsProps {
-    handleReset: () => void
-    resetNumber: () => void
-    handleStart: () => void
+    handleReset: FunctionReturnVoid
+    resetNumber: FunctionReturnVoid
+    handleStart: FunctionReturnVoid
     randomNumber: string | undefined
     isActive: boolean
+    validateRandomNumber: FunctionReturnVoid
 }
 
 export interface ResetButtonProps {
-    handleReset: () => void
-    resetNumber: () => void
+    handleReset: FunctionReturnVoid
+    resetNumber: FunctionReturnVoid
     randomNumber: string | undefined
 }
 
@@ -41,10 +44,44 @@ export interface RandomNumberProps {
 }
 
 export interface StartButtonProps {
-    handleStart: () => void
+    handleStart: FunctionReturnVoid
     randomNumber: string | undefined
 }
 
 export interface FinishButtonProps {
-    validateRandomNumber: () => void
+    validateRandomNumber: FunctionReturnVoid
 }
+
+export interface MultiLineProps {
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
+type FunctionReturnVoid = () => void
+
+//REDUX
+export enum ActionType {
+    LOOKING_FOR_MISTAKES = 'LOOKING_FOR_MISTAKES',
+    NO_MISTAKES = 'NO_MISTAKES',
+    THERE_ARE_MISTAKES = 'THERE_ARE_MISTAKES'
+}
+
+export interface ActionPending {
+    type: ActionType.LOOKING_FOR_MISTAKES;
+}
+
+export interface ActionSuccess {
+    type: ActionType.NO_MISTAKES;
+    data: NumbersWithState;
+}
+
+export interface ActionFail {
+    type: ActionType.THERE_ARE_MISTAKES;
+    data?: string ;
+}
+
+export type NumbersWithState = {
+    error: boolean;
+    number: string
+}[]
+
+export type Action = ActionPending | ActionSuccess | ActionFail;
