@@ -2,17 +2,17 @@ import { Grid } from "@mui/material"
 import { ChangeEvent, useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { EnteredNumber, MultiLine, RandomButtons, RandomNumber } from ".."
-import { validateNumbers } from "../../../../actions";
-import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { HomePageContext } from "../HomePageComponent/HomePageComponent";
 import { StopWatch } from "../StopWatch/StopWatch"
 import { isEmpty } from 'lodash'
+import { numbers as numberState, resetNumbers, validateNumbers } from "../../../../reducers/numbersReducer";
 
 function NumberGenerator(){
     const { time, randomNumber, resetNumber, handleReset, handleStart, isActive, handlePauseResume } = useContext(HomePageContext);
     const [ number, setNumber ] = useState<string>("")
     const dispatch = useDispatch()
-    const { numbers, looking } = useTypedSelector((state) => state.numbers);
+    const { numbers } = useAppSelector(numberState)
 
     const validateRandomNumber = () => {
         handlePauseResume()
@@ -23,18 +23,22 @@ function NumberGenerator(){
         setNumber(e.target.value)
     }
 
+    const reset = () => {
+        handleReset()
+        dispatch(resetNumbers())
+    }
     return(
-        <Grid container spacing={3} justifyContent="center" style={{margin: '20px 0'}}>
+        <Grid container spacing={3} justifyContent="center" >
+            {/* HAS TO FIX THIS*/}
             <StopWatch time={time} />
-            {console.log(numbers)}
             {(!isActive || !isEmpty(numbers)) && <RandomNumber randomNumber={randomNumber} />}
             {(isActive && isEmpty(numbers)) && <MultiLine onChange={onChangeMultiLine} />}
-            {!isEmpty(numbers) && <EnteredNumber numbers={numbers} />}
+            {!isEmpty(numbers) && <EnteredNumber />}
             <RandomButtons 
                 validateRandomNumber={validateRandomNumber}
                 randomNumber={randomNumber}
                 resetNumber={resetNumber}
-                handleReset={handleReset}
+                handleReset={reset}
                 handleStart={handleStart}
                 isActive={isActive} 
             />

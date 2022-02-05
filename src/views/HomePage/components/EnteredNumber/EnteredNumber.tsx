@@ -1,25 +1,26 @@
 import { Grid, Typography } from "@mui/material";
 import { makeStyles } from '@mui/styles';
-import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { useAppSelector } from "../../../../hooks/useAppSelector";
+import { numbers as numberState } from "../../../../reducers/numbersReducer";
 
 const useStyles = makeStyles({
-    errorNumber: {
-        color: 'red',
+    numbersClasses: {
+        letterSpacing: '1em',
+        overflowWrap: 'anywhere'
     },
 });
 
 function EnteredNumber() {
-    const { errorNumber } = useStyles();
-    const { numbers } = useTypedSelector((state) => state.numbers);
+    const { numbersClasses } = useStyles();
+    const { numbers } = useAppSelector(numberState)
 
     return (
-        <Grid item xs={11} sm={7}>
-            {console.log(numbers)}
+        <Grid container item xs={11} sm={7} justifyContent="center" >
             {numbers.map(({number, error}, index) => (
-                <Typography variant="h6" className={error && errorNumber}>
+                <Typography key={index} className={numbersClasses} variant="h6" sx={{ color: error ? 'red': 'black' }}>
                     {number}
                 </Typography>
-            ))}
+            ))}            
         </Grid>
     )
 }

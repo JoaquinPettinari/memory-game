@@ -1,35 +1,62 @@
-import { Action, ActionType } from "../interfaces";
+import { createSlice } from "@reduxjs/toolkit";
+import { AppThunk, RootState } from "../app/store";
+import { NumbersReducerState, NumbersWithState } from "../interfaces";
 
-const initialState = {
-    looking: false,
-    error: false,
-    numbers: []
-}
+const initialState: NumbersReducerState = {
+   looking: false,
+   error: false,
+   numbers: [],
+};
 
-function numbersReducer(state = initialState, action: Action){    
-    switch (action.type){
-        case ActionType.LOOKING_FOR_MISTAKES:
-            return{
-                ...state,
-                looking: true,
-                error: false
-            }
-        case ActionType.NO_MISTAKES:
-            return {
-                ...state,
-                looking: false,
-                error: false,
-                numbers: action.data
-            };
-        case ActionType.THERE_ARE_MISTAKES:
-            return {
-                ...state,
-                looking: false,
-                error: true,
-            };
-        default:
-            return state
-    }
-}
+export const numberReducer = createSlice({
+   name: "numbers",
+   initialState,
+   reducers: {
+      lookingForMistakes: (state) => {
+         state.looking = true;
+         state.error = false;
+      },
+      saveResults: (state, action) => {
+         state.numbers = action.payload;
+         state.error = false;
+         state.looking = false;
+      },
+      failLooking: (state) => {
+         state.error = true;
+      },
+      reset: (state) => {
+         state.numbers = [];
+      },
+   },
+});
 
-export default numbersReducer;
+export const numbers = (state: RootState) => state.numbers;
+
+export const { lookingForMistakes, saveResults, failLooking, reset } =
+   numberReducer.actions;
+
+export const validateNumbers =
+   (enteredNumber: string, randomNumber: string | undefined): AppThunk =>
+   async (dispatch) => {
+      dispatch(lookingForMistakes());
+      try {
+         const enteredNumbersSplited = enteredNumber.split("");
+         const randomNumbersSplited = randomNumber?.split("");
+         const validatedNumberList: NumbersWithState =
+            enteredNumbersSplited.map((number, index) => {
+               return {
+                  number: number,
+                  error:
+                     number !==
+                     (randomNumbersSplited && randomNumbersSplited[index]),
+               };
+            });
+         dispatch(saveResults(validatedNumberList));
+      } catch (error) {
+         dispatch(failLooking());
+      }
+   };
+
+export const resetNumbers = (): AppThunk => (dispatch) => { dispatch(reset())};
+
+export default numberReducer.reducer;

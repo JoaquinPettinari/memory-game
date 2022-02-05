@@ -84,4 +84,10 @@ export type NumbersWithState = {
     number: string
 }[]
 
+export interface NumbersReducerState {
+    looking: boolean
+    error: boolean
+    numbers: NumbersWithState
+}
+
 export type Action = ActionPending | ActionSuccess | ActionFail;

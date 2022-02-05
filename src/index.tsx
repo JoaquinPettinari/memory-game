@@ -4,22 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { applyMiddleware, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from './reducers/rootReducer';
-
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-export const store = createStore(
-  rootReducer,
-  compose(applyMiddleware(thunk), composeEnhancers()),
-)
+import { store } from './app/store'
 
 ReactDOM.render(
   <React.StrictMode>
