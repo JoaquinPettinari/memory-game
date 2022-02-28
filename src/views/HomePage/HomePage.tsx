@@ -1,12 +1,11 @@
-import { Title, NumberConfig, NumberGenerator, HomePageComponent } from './components'
+import { HomePageComponent } from './components'
+import { GameCards } from './components/GameCards/GameCards'
 
-export function HomePage(){
+export function HomePage() {
 
-    return(
+    return (
         <HomePageComponent>
-            <Title />
-            <NumberConfig />
-            <NumberGenerator />
+            <GameCards />
         </HomePageComponent>
     )
 }

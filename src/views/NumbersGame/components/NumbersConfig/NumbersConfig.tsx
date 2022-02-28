@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { useContext } from "react";
 import * as Yup from "yup";
 import { ErrorText } from "../ErrorText/ErrorText";
-import { HomePageContext } from "../HomePageComponent/HomePageComponent";
+import { HomePageContext } from "../../../HomePage/components/HomePageComponent/HomePageComponent";
 
 const validationSearch = Yup.object().shape({
     number: Yup.number()
@@ -13,10 +13,10 @@ const validationSearch = Yup.object().shape({
 
 function NumberConfig() {
 
-    const { submitForm, randomNumber } = useContext( HomePageContext );
+    const { submitForm, randomNumber } = useContext(HomePageContext);
 
-    if(randomNumber) return null
-    
+    if (randomNumber) return null
+
     return (
         <Formik
             initialValues={{ number: 0 }}
@@ -46,7 +46,7 @@ function NumberConfig() {
                                 size="small"
                             />
                         </Grid>
-                        <Grid item xs={10} sm={6} style={{ textAlign:'start'}}>
+                        <Grid item xs={10} sm={6} style={{ textAlign: 'start' }}>
                             <Button
                                 color="primary"
                                 type="submit"

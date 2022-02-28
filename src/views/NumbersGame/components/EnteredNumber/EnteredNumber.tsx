@@ -17,7 +17,7 @@ function EnteredNumber() {
     return (
         <Grid container item xs={11} sm={7} justifyContent="center" >
             {numbers.map(({number, error}, index) => (
-                <Typography key={index} className={numbersClasses} variant="h6" sx={{ color: error ? 'red': 'black' }}>
+                <Typography key={index} className={numbersClasses} variant="h6" sx={{ color: error ? 'red': 'greenyellow' }}>
                     {number}
                 </Typography>
             ))}            
